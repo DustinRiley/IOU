@@ -1,5 +1,5 @@
-const addGroupService = require('../services/add-group-to-user');
-const userByIdService = require('../services/user-by-id')
+const addGroupService = require('../../services/add-group-to-user');
+const userByIdService = require('../../services/user-by-id')
 
 async function addGroup(req){
     const id = req.payload.id;

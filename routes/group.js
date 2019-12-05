@@ -5,6 +5,19 @@ const userModel = require('../model/user');
 const generate = require('nanoid/generate')
 const legalChars ='ABCDEFGHIJKLMONPQRSTUVWYXZabcdefghijklmnopqrstuvwyxz0123456789';
 
+const controllerHandler = (promise, params) => async (req, res, next) => {
+    const boundParams = params ? params(req, res, next) : [];
+    try {
+      const result = await promise(...boundParams);
+      console.log('this is the result', result)
+      return res.json(result || { message: 'OK' });
+    } catch (error) {
+        console.log(error)
+      return res.status(500).json({error: error.toString()});
+    }
+  };
+  const c = controllerHandler;
+
 /* GET Group Info By Url. */
 router.get('/:url', function(req, res, next) {
     let url = req.params.url;
@@ -25,8 +38,12 @@ router.get('/:url', function(req, res, next) {
     
 });
 
+
+router.post('/new', auth.required, c(newGroup.new, (req, res)=>[req]));
+
+
 /* POST New Group */
-router.post('/new', (req,res)=>{
+router.post('/anew', (req,res)=>{
     let originalUser = req.body.uId;
     //IMPORTANT FUTURE let cred = req.body.credentials;
     let  private = req.body.private;
