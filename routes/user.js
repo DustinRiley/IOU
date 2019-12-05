@@ -35,74 +35,8 @@ router.post('/new', c(newUser.newUser, (req, res, next) => [req.body]));
 */
 router.post('/addgroup', auth.required, c(addGroup.addGroup, (req, res)=>[req]));
 
+/*POST Login*/
 router.post('/login', auth.optional, c(login.login, (req,res)=>[req]));
-
-
-
-
-
-/* POST Login */
-router.post('/alogin', auth.optional, (req,res)=>{
-    console.log(req.payload.id)
-    let uName = req.body.user;
-    let password = req.body.password;
-    //console.log(uName+" "+password);
-    userModel.findOne({uName:uName, password:password}, (err, doc)=>{
-        if(doc){
-            res.json({
-                status:"success", 
-                credentials:'login credentials TODO',
-                user: doc
-            })
-        }
-        else{
-            res.json({
-                status:'error',
-                msg: 'Invalid user name or password'
-            })
-        }
-    })
-
-});
-
-/* Get Groups */
-
-
-
-/* Add Group to user */
-router.post('/aaddgroup', (req,res)=>{
-    let uId = req.body.uId;
-    let groupToAdd = req.body.gId;
-
-    userModel.findOne({_id:uId}, (err, user)=>{
-        if(user){
-            let groups = user.groups;
-            groups.push(groupToAdd);
-            user.groups = groups;
-            user.save((err)=>{
-             //   console.log(err);
-                if(err){
-                    res.json({
-                        status:'error',
-                        msg: 'Something went wrong with saving new group'
-                        });
-                }
-                else{
-                    res.json({
-                        status:'success',
-                        msg: 'added group: '+ groupToAdd
-                    })
-                }
-            });
-        }
-        else{
-            res.json({
-                status:'error',
-                msg: 'Could not find user'
-                });
-        }
-    });
-});
 
 //TODO 
 //Leave group
