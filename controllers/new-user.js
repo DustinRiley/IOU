@@ -3,6 +3,7 @@ const createUser = require('../services/new-user');
 const jwt = require('../helper/jwt-auth');
 
 async function newUser(req){
+    req=req.body;
     console.log(req.password, '  ', req.username);
 
     if(!req.password||!req.username){

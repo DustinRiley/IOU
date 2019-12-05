@@ -28,7 +28,7 @@ const controllerHandler = (promise, params) => async (req, res, next) => {
 router.get('/current', auth.required, c(getUserById.getUserById, (req, res, next) => [req]));
 
 /* POST New User*/
-router.post('/new', c(newUser.newUser, (req, res, next) => [req.body]));
+router.post('/new', c(newUser.newUser, (req, res, next) => [req]));
 
 /* POST a group to a user 
 //TODO add to pending groups
