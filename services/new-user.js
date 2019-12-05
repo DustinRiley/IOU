@@ -8,7 +8,6 @@ function newUser (username, salt, hash){
         hash: hash,
         globalDebt: 0
     })
-    console.log('service')
    return user.save();
 }
 

@@ -38,42 +38,10 @@ router.get('/:url', function(req, res, next) {
     
 });
 
+/*Post new group*/ 
+router.post('/new', auth.required, c(newGroup.newGroup, (req, res)=>[req]));
 
-router.post('/new', auth.required, c(newGroup.new, (req, res)=>[req]));
 
-
-/* POST New Group */
-router.post('/anew', (req,res)=>{
-    let originalUser = req.body.uId;
-    //IMPORTANT FUTURE let cred = req.body.credentials;
-    let  private = req.body.private;
-    let name = req.body.name;
-    let url = generate(legalChars, 8);
-    console.log("here")
-    let group = new groupModel({
-        users: [originalUser],
-        url: url,
-        gName: name,
-        pendingTansaction: [],
-        approvedTranactions: [],
-        isPrivate: private
-    })
-    console.log(JSON.stringify(group));
-    group.save(group, (err)=>{
-        if(err){
-            json.res({
-                status: 'error',
-                msg: err
-            })
-        }
-        else{
-            res.json({
-                status: 'succes',
-                group: group
-            })
-        }
-    })
-})
 
 /* Post New Transaction */
 

@@ -7,7 +7,7 @@ const groupSchema = new Schema({
    users: [String],
    url:  { type : String , unique : true, required : true },
    gName: String,
-   isPrivate: Boolean,
+   isPublic: Boolean,
    pendingTransactions: [{
        userId: String, 
        amount:Number, 
