@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 const userModel = require('../model/user');
 const auth = require('../helper/auth');
-const newUser = require('../controllers/new-user');
-const getUserById = require('../controllers/user-by-id');
+const newUser = require('../controllers/user/new-user');
+const getUserById = require('../controllers/user/user-by-id');
 const addGroup = require('../controllers/user/add-group-to-user')
-const login = require('../controllers/login')
+const login = require('../controllers/user/login')
 //import {getUserById} from('../controllers/user-by-id');
 
 

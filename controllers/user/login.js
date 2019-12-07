@@ -1,7 +1,7 @@
-const userByName = require('../services/user-by-name');
-const userById = require('../services/user-by-id')
-const saltHash = require('../services/salt-hash');
-const jwt = require('../helper/jwt-auth')
+const userByName = require('../../services/user-by-name');
+const userById = require('../../services/user-by-id')
+const saltHash = require('../../services/salt-hash');
+const jwt = require('../../helper/jwt-auth')
 
 async function login(req){
     //const id = req.payload.id;

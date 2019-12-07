@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
+const auth = require('../helper/auth');
 const groupModel = require('../model/group');
 const userModel = require('../model/user');
-const generate = require('nanoid/generate')
-const legalChars ='ABCDEFGHIJKLMONPQRSTUVWYXZabcdefghijklmnopqrstuvwyxz0123456789';
+const newGroup = require('../controllers/group/new-group');
+const getGroupByUrl = require('../controllers/group/group-by-url')
+
 
 const controllerHandler = (promise, params) => async (req, res, next) => {
     const boundParams = params ? params(req, res, next) : [];
@@ -18,28 +20,11 @@ const controllerHandler = (promise, params) => async (req, res, next) => {
   };
   const c = controllerHandler;
 
-/* GET Group Info By Url. */
-router.get('/:url', function(req, res, next) {
-    let url = req.params.url;
-    groupModel.findOne({url:url},(err, group)=>{
-        if(group){
-            res.json({
-                status: 'success',
-                group: group
-            })
-        }
-        else{
-            res.json({
-                status: 'error',
-                msg: err
-            })
-        }
-    })
-    
-});
-
 /*Post new group*/ 
 router.post('/new', auth.required, c(newGroup.newGroup, (req, res)=>[req]));
+
+/* Get group by url auth.required if is private*/
+router.get('/', auth.optional, c(getGroupByUrl.getGroup, (req,res)=>[req]))
 
 
 

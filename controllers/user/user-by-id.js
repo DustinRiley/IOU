@@ -1,4 +1,4 @@
-const getUserService = require('../services/user-by-id')
+const getUserService = require('../../services/user-by-id')
 
 async function getUserById(req){
     const id = req.payload.id;

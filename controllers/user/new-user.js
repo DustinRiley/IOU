@@ -1,6 +1,6 @@
-const hash = require('../services/salt-hash');
-const createUser = require('../services/new-user');
-const jwt = require('../helper/jwt-auth');
+const hash = require('../../services/salt-hash');
+const createUser = require('../../services/new-user');
+const jwt = require('../../helper/jwt-auth');
 
 async function newUser(req){
     req=req.body;
