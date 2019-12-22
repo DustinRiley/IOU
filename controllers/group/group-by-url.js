@@ -3,7 +3,7 @@ const userHasAccess = require('../../services/user-has-access-to-group')
 
 
 async function getGroup(req){
-    let url = req.body.url;
+    let url = req.params.url;
     if(req.payload){
         var id = req.payload.id;
     }

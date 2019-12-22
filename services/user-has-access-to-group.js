@@ -18,4 +18,4 @@ function hasAccess(group, id){
     else return true;
 }
 
-module.exports.isMember = isMember;
+module.exports.hasAccess = hasAccess;

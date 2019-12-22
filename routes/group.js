@@ -23,8 +23,8 @@ const controllerHandler = (promise, params) => async (req, res, next) => {
 /*Post new group*/ 
 router.post('/new', auth.required, c(newGroup.newGroup, (req, res)=>[req]));
 
-/* Get group by url auth.required if is private*/
-router.get('/', auth.optional, c(getGroupByUrl.getGroup, (req,res)=>[req]))
+/* Get group by url auth required if is private*/
+router.get('/:url', auth.optional, c(getGroupByUrl.getGroup, (req,res)=>[req]))
 
 
 
